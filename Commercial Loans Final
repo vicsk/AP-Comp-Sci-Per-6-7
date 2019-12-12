@@ -18,7 +18,7 @@ public class CommercialLoanTest
         
     System.out.println("This section of the bank distributes and manages commercial loans for businesses");
     
-    System.out.println("Enter your company name (this will serve as the username for future logins):");
+    System.out.println("Enter your company name:");
     
     newloan.setUsername(Input.nextLine());
     
@@ -37,10 +37,10 @@ public class CommercialLoanTest
     System.out.println("Your amount to be loaned is $" + (Math.floor(newloan.calculateFinalLoan() * 100) / 100));
     
     //OTHER CLASSES
-    BankAccountTest account = new BankAccount();
-    account.withdraw(newloan.getLoan());
+    //BankAccountTest account = new BankAccount();
+    //account.withdraw(newloan.getLoan());
     
-    System.out.println("The new bank account balance is $" + (Math.floor(account.getBalance() * 100) / 100));
+    //System.out.println("The new bank account balance is $" + (Math.floor(account.getBalance() * 100) / 100));
     
     System.out.println("Enter the amount of months to pay the loan over to set up a payment plan:");
     
@@ -78,19 +78,7 @@ public class CommercialLoanTest
     while (loop2 == 0)
     
     {
-        
-        while (loop1 == 0)
-        
-        {
-            System.out.print("\nEnter username: ");
-            
-            if (Input2.nextLine().equals(newloan.getUsername()))
-            break;
-            
-            else
-            System.out.println("Invalid username, try again.");
     
-        }
         
         while (loop1 == 0)
         
@@ -125,7 +113,7 @@ public class CommercialLoanTest
                         if (Input3.nextInt() == 4)
                         
                         {
-                            account.deposit(newloan.calculatePrincipalFinal());
+                            //account.deposit(newloan.calculatePrincipalFinal());
                             newloan.makePayment();
                             System.out.println("A new payment on the loan has just been made, you now owe $" + (Math.floor(newloan.getLoan() * 100) / 100));
                             
