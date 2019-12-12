@@ -332,12 +332,6 @@ class CommercialLoan
         
     }
     
-    //public double subtractLoan()
-    
-    //{
-        return accountbalance - loan;
-    //}
-    
     
     public double calculateMonthlyPayment()
     
