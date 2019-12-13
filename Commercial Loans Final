@@ -10,8 +10,7 @@ public class CommercialLoanTest
       
     int loop1 = 0;
     int loop2 = 0;  
-    int loop3 = 0; 
-      
+
     Scanner Input = new Scanner (System.in);  
         
     CommercialLoan newloan = new CommercialLoan();
@@ -36,11 +35,9 @@ public class CommercialLoanTest
     
     System.out.println("Your amount to be loaned is $" + (Math.floor(newloan.calculateFinalLoan() * 100) / 100));
     
-    //OTHER CLASSES
-    BankAccountTest account = new BankAccount();
-    account.withdraw(newloan.getLoan());
+    BankAccount Checking = new BankAccount();
     
-    System.out.println("The new bank account balance is $" + (Math.floor(account.getBalance() * 100) / 100));
+    System.out.println("A new checking account has been set up with the bank for you.");
     
     System.out.println("Enter the amount of months to pay the loan over to set up a payment plan:");
     
@@ -49,6 +46,7 @@ public class CommercialLoanTest
     System.out.println("The following is a spreadsheet of the payment calculations of your loan, and how much will need to be paid per month:");
     
     newloan.setLoanTemp(newloan.getLoan());
+    newloan.setLoanEdited(newloan.getLoan());
     
     System.out.println("\nRepayment per Month: $" + (Math.floor(newloan.calculateMonthlyPayment() * 100) / 100));
     System.out.println("+---------------------------------------------------------------------------------------------+");
@@ -106,7 +104,7 @@ public class CommercialLoanTest
     
         }
             
-        System.out.println("Welcome, " + newloan.getUsername() + ".  You currently owe a " + newloan.evaluateLoanType() + " loan of $" + (Math.floor(newloan.getLoan() * 100) / 100) + " and have made " + newloan.getPaymentsMade() + " monthly payments.");
+        System.out.println("Welcome, " + newloan.getUsername() + ".  You currently owe a " + newloan.evaluateLoanType() + " loan of $" + (Math.floor(newloan.getLoanEdited() * 100) / 100) + " and have made " + newloan.getPaymentsMade() + " monthly payments.");
         
         
         while (loop1 == 0)
@@ -114,25 +112,28 @@ public class CommercialLoanTest
         {
             
             System.out.println("Press 1 to make new payments, press 2 to view the payment spreadsheet, or press 3 to log out. (Enter number individually until result)");
+            Scanner Input3 = new Scanner (System.in); 
             
-                if (Input2.nextInt() == 1)
+                if (Input3.nextInt() == 1)
                 
                 {
-                    Scanner Input3 = new Scanner (System.in);
-                    System.out.println("The current amount of the loan still owed is $" + (Math.floor(newloan.getLoan() * 100) / 100) + ", with " + newloan.getPaymentsMade() + " payments having been made.");
+                    Scanner Input4 = new Scanner (System.in);
+                    System.out.println("The current amount of the loan still owed is $" + (Math.floor(newloan.getLoanEdited() * 100) / 100) + ", with " + newloan.getPaymentsMade() + " payments having been made.");
                     System.out.println("This monthly principal is $" + (Math.floor(newloan.calculatePrincipalFinal() * 100) / 100));
                     System.out.println("Press 4 to make this payment, or press 0 to cancel (Enter number individually until result)");
                     
-                        if (Input3.nextInt() == 4)
+                        if (Input4.nextInt() == 4)
                         
                         {
-                            account.deposit(newloan.calculatePrincipalFinal());
+                            Sysyem.out.println("Deposit the monthly principle into your checking account:");
+                            Checking.deposit(newloan.calculatePrincipalFinal();
+                            System.out.println("Your checking account now has $" + (Math.floor(Checking.getBalance() * 100) / 100)));
                             newloan.makePayment();
-                            System.out.println("A new payment on the loan has just been made, you now owe $" + (Math.floor(newloan.getLoan() * 100) / 100));
+                            System.out.println("A new payment on the loan has just been made, you now owe $" + (Math.floor(newloan.getLoanEdited() * 100) / 100));
                             
                         }
                         
-                        else if (Input3.nextInt() == 0)
+                        else if (Input4.nextInt() == 0)
                         
                         {
                             System.out.println("No payment was made.");
@@ -140,11 +141,10 @@ public class CommercialLoanTest
                     
                 }
             
-                else if (Input2.nextInt() == 2)
+                else if (Input3.nextInt() == 2)
                 
                 {
-                    
-                    System.out.println("The current amount of the loan still owed is $" + (Math.floor(newloan.getLoan() * 100) / 100) + ", with " + newloan.getPaymentsMade() + " payments having been made.");
+                    System.out.println("The current amount of the loan still owed is $" + (Math.floor(newloan.getLoanEdited() * 100) / 100) + ", " + "or month #" + (1 + newloan.getPaymentsMade()) +", with " + newloan.getPaymentsMade() + " payments having been made.");
                     System.out.println("\nRepayment per Month: $" + (Math.floor(newloan.calculateMonthlyPayment() * 100) / 100));
                     System.out.println("+---------------------------------------------------------------------------------------------+");
                     System.out.println("| Month |        Starting Balance |     Interest (3.5%) |       Principal |    Ending Balance |");
@@ -152,8 +152,6 @@ public class CommercialLoanTest
                     
                     newloan.setMonthsTemp(1);
                     newloan.setLoanTemp(newloan.getLoan());
-        
-                    
                     
                     while (newloan.getMonthsTemp() <= newloan.getMonths())
                     
@@ -171,7 +169,7 @@ public class CommercialLoanTest
                     
                 }
                 
-                else if (Input2.nextInt() == 3)
+                else if (Input3.nextInt() == 3)
                 
                 {
                     System.out.println("You've been logged out.");
@@ -235,6 +233,13 @@ class CommercialLoan
         monthstemp = inputmonths;
     }
     
+    public void setLoanEdited(double loanedit)
+    {
+    	loanedited = loanedit;
+    }
+    
+    
+    
     ////other
     public void incrementMonthsTemp(int monthsmethod)
     {
@@ -281,6 +286,11 @@ class CommercialLoan
     public int getPaymentsMade()
     {
         return paymentsmade;
+    }
+    
+    public double getLoanEdited()
+    {
+    	return loanedited;
     }
 
     //interesting
@@ -368,7 +378,7 @@ class CommercialLoan
     public double calculatePrincipalFinal()
     
     {
-        return monthlypayment - (loan * (Interest / (double) months));
+        return monthlypayment - (loanedited * (Interest / (double) months));
     }
     
     public double calculateEndingBalance()
@@ -385,14 +395,15 @@ class CommercialLoan
     public double makePayment()
     
     {
-        loan = loan - (monthlypayment - (loan * (Interest / (double) months)));
-        loantemp = loan;
+    	loanedited = loan - (monthlypayment - (loan * (Interest / (double) months)));
+        loantemp = loanedited;
         paymentsmade++;
-        return loan;
+        return loanedited;
     }
     
     //Properties
     public double loan;
+    public double loanedited;
     public int loantype;
     public double loantemp;
     public int months;
@@ -404,6 +415,7 @@ class CommercialLoan
     public double i;
     public double n;
     
+    //for login
     public String cipassword;
     public String ciusername;
     
