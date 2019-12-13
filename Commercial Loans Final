@@ -125,9 +125,9 @@ public class CommercialLoanTest
                         if (Input4.nextInt() == 4)
                         
                         {
-                            Sysyem.out.println("Deposit the monthly principle into your checking account:");
+                            System.out.println("Deposit the monthly principle into your checking account:");
                             Checking.deposit(newloan.calculatePrincipalFinal();
-                            System.out.println("Your checking account now has $" + (Math.floor(Checking.getBalance() * 100) / 100)));
+                            System.out.println("Your checking account now has $" + (Math.floor(Checking.getBalance() * 100) / 100));
                             newloan.makePayment();
                             System.out.println("A new payment on the loan has just been made, you now owe $" + (Math.floor(newloan.getLoanEdited() * 100) / 100));
                             
